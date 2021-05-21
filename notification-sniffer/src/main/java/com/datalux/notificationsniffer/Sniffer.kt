@@ -3,7 +3,6 @@ package com.datalux.notificationsniffer
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import android.app.Notification
-import android.util.Log
 import kotlinx.coroutines.runBlocking
 
 

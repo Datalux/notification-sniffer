@@ -3,7 +3,9 @@ package com.datalux.notificationsniffer
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.provider.Settings
+import androidx.annotation.RequiresApi
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import kotlinx.coroutines.channels.Channel
@@ -40,12 +42,13 @@ class NotificationSniffer {
             stream.consumeEach { notification -> consume(notification) }
         }
 
-        fun startSniffing(){
+        fun startSniffing(context: Context){
             val periodicWorkRequest =
                 PeriodicWorkRequestBuilder<SnifferService>(24, TimeUnit.HOURS).build()
-            WorkManager.getInstance().enqueue(periodicWorkRequest)
+            WorkManager.getInstance(context).enqueue(periodicWorkRequest)
         }
 
+        @RequiresApi(Build.VERSION_CODES.LOLLIPOP_MR1)
         fun askForPermission(context: Context){
             context.startActivity( Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))
         }
@@ -56,10 +59,12 @@ class NotificationSniffer {
             return flat != null && flat.contains(cn.flattenToString())
         }
 
+        @Suppress("unused")
         fun getNotifications(): ArrayList<ExtractedNotification> {
-            return buffer;
+            return buffer
         }
 
+        @Suppress("unused")
         fun setOutputType(outputType: OutputType){
             ot = outputType
         }
@@ -68,6 +73,7 @@ class NotificationSniffer {
 
 }
 
+@Suppress("unused")
 enum class OutputType {
     STREAM, BUFFER
 }
