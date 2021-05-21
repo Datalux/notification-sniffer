@@ -1,5 +1,5 @@
 # notification-sniffer
-An Android Library that implements a Notificaion Sniffer
+An Android Library that implements a Notification Sniffer
 
 ## Gradle Dependency
 - gradle project level
