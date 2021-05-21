@@ -7,7 +7,7 @@ import android.util.Log
 import kotlinx.coroutines.runBlocking
 
 
-class Sniffer : NotificationListenerService() {
+internal class Sniffer : NotificationListenerService() {
 
     override fun onNotificationPosted(sbn: StatusBarNotification?) {
         super.onNotificationPosted(sbn)

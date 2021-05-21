@@ -1,18 +1,17 @@
 package com.datalux.notificationsniffer
 
 import android.content.Context
-import android.util.Log
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import com.datalux.notificationsniffer.NotificationSniffer.Companion.callback
+import com.datalux.notificationsniffer.NotificationSniffer.Companion.listener
 import kotlinx.coroutines.runBlocking
 
-class SnifferService(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
+internal class SnifferService(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
 
     override fun doWork(): Result {
         runBlocking {
             NotificationSniffer.consume { extractedNotificationResult ->
-                callback.onResult(extractedNotificationResult)
+                listener.onResult(extractedNotificationResult)
             }
         }
         return Result.success()

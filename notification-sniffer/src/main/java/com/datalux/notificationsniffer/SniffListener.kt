@@ -1,5 +1,5 @@
 package com.datalux.notificationsniffer
 
-interface SniffCallback {
+interface SniffListener {
     fun onResult(extractedNotification: ExtractedNotification)
 }
